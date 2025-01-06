@@ -10,7 +10,8 @@ class home(TemplateView):
         context = super().get_context_data(**kwargs)
         context["products"] = Product.objects.all().filter(is_available=True)[:8]
         context["category"] = Category.objects.all()
-        context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
+        if self.request.user.is_authenticated:
+            context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
         return context
     
 
@@ -47,7 +48,8 @@ class CategoryBasedView(TemplateView):
  
         context['category'] = Category.objects.all()
         context['products'] = products
-        context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
+        if self.request.user.is_authenticated:
+            context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
         return context
     
 class ProductDetailView(DetailView):
@@ -62,7 +64,8 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["category"] = Category.objects.all()
-        context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
+        if self.request.user.is_authenticated:
+            context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
         return context
     
 class SearchView(ListView):
@@ -83,8 +86,9 @@ class SearchView(ListView):
 
         context["products"]=products
         context["category"]=Category.objects.all()
-        context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
+        if self.request.user.is_authenticated:
+            context['cart_item_count'] = CartItem.objects.filter(user=self.request.user).count()
         return context
-   
-    
-    
+
+
+
