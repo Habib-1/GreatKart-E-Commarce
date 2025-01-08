@@ -26,8 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-s@v(pruca8t83-z6$emtd41-$(^)6!j2p*z-0!-uux4+rz^b-('
 SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-import os
-DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+
+DEBUG ='True'
 
 ALLOWED_HOSTS = [
     'greatkart-8ieh.onrender.com',  # Production server
